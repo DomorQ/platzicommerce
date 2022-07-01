@@ -67,3 +67,18 @@ function plz_theme_supports(){
 
 /* esta funcion after_setup_theme una vez que el tema esta activo y se empieza a renderizar llama a la funcion */
 add_action("after_setup_theme","plz_theme_supports");
+
+
+function plz_add_menus(){
+    /* ponemos la funcion de wordpress para registrar uno o mas menus 
+        Iniciamos un array y su primer atributo es poner el id del menu,
+        en este caso hay dos menus uno principal y otro mobile */
+    register_nav_menus(
+        array(
+        'menu-principal' => "Menu principal",
+        'menu-responsive' => "Menu-responsive"
+        )
+    );
+}
+
+add_action("after_setup_theme", "plz_add_menus");

@@ -23,14 +23,11 @@
                     <?php the_custom_logo()?> <!-- aqui se pondra el logo que subimos directamente desde wordpress -->
                 </div>
                 <div class="encabezado__menu col-6 col-md-5">
-                    <ul>
-                        <li class="encabezado__item current"><a href="#">All</a></li>
-                        <li class="encabezado__item"><a href="#">Clothes</a></li>
-                        <li class="encabezado__item"><a href="#">Electronics</a></li>
-                        <li class="encabezado__item"><a href="#">Furniture</a></li>
-                        <li class="encabezado__item"><a href="#">Toys</a></li>
-                        <li class="encabezado__item"><a href="#">Others</a></li>
-                    </ul>
+                    <?php wp_nav_menu( /* esto hara que nos renderice el menu creado en wordpress y se refleje en nuestra pagina donde estaba el menu anteriror */
+                        array(
+                            "menu" => 'menu-principal' /* minimo debe tener un atributo en este caso es "menu" y el id que tiene dentro de la funcion */ 
+                        )
+                        ); ?>
                 </div>
                 <div class="encabezado__cart col-5 col-md-1">
                     <a href="sign_in.html" class="encabezado_sign-in">
@@ -42,14 +39,11 @@
                 </div>
             </div>
             <div class="encabezado__menu-responsive">
-                <ul>
-                    <li class="encabezado__item current"><a href="#">All</a></li>
-                    <li class="encabezado__item"><a href="#">Clothes</a></li>
-                    <li class="encabezado__item"><a href="#">Electronics</a></li>
-                    <li class="encabezado__item"><a href="#">Furniture</a></li>
-                    <li class="encabezado__item"><a href="#">Toys</a></li>
-                    <li class="encabezado__item"><a href="#">Others</a></li>
-                </ul>
+                    <?php wp_nav_menu(
+                        array(
+                            'menu' => "menu-responsive"
+                        )
+                        );?>
             </div>
         </div>
     </header>
