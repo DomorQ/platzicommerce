@@ -82,3 +82,17 @@ function plz_add_menus(){
 }
 
 add_action("after_setup_theme", "plz_add_menus");
+
+
+function plz_add_sidebar(){
+    register_sidebar(
+        array(
+            'name' => 'Pie de pagina',
+            'id' => 'pie-pagina',
+            'before_widget' => '',/* usamos before y after para que vaya contenido antes y despues del widget en este caso solo usamos un espacio */
+            'after_widget' => '' 
+        )
+    );
+}
+
+add_action("widgets_init","plz_add_sidebar");
