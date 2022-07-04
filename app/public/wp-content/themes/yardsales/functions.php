@@ -52,7 +52,7 @@ function plz_theme_supports(){
 
     add_theme_support('title-tag'); /* hay muchos pero estos son los que no denerian faltar */
     /* title tag hace que en la pestana de navegacion se muestre el nombre de la pagina, ejm: si estas en la pantalla inicio se muestra en la pestana inicio */
-    add_theme_support('post-thumbnails');
+    add_theme_support('post-thumbnails');/* Importante que este para los CUSTOM POST TYPE */
     /* post_thumbnails agrega imagen destacada */
     add_theme_support('custom-logo',
     array(
@@ -96,3 +96,51 @@ function plz_add_sidebar(){
 }
 
 add_action("widgets_init","plz_add_sidebar");
+
+
+function plz_add_number(){
+    register_sidebar(
+        array(
+            'name' => 'contacto',
+            'id' => 'contacto',
+            'before_widget' => '<h4>Contacto</h4>',/* usamos before y after para que vaya contenido antes y despues del widget en este caso solo usamos un espacio */
+            'after_widget' => '' 
+        )
+    );
+}
+
+add_action("widgets_init","plz_add_number");
+
+/* Custom post type */
+
+function plz_add_custom_post_type(){
+
+    $labels = array(
+        'name' => 'Producto', /* nombre que se vera dentro del administrador de wordpress */
+        'singular_name' => 'Producto', /* nombre del post type */
+        'all_items' => 'Todos los productos', /*  */
+        'add_new' => 'Añadir producto'
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'description'        => 'Productos para listar en un catálogos.',
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'producto' ), /* formato para url ...../producto... */
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false, /* jerarquia */
+        'menu_position'      => 5,
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ), /* cosas que podemos agregar dentro del producto */
+        'taxonomies'         => array('category'), /* sirve para segmentar */
+        'show_in_rest'       => true,
+        'menu_icon'          => 'dashicons-cart' /* icono */
+    );
+
+    register_post_type('producto',$args); /* primer atributo en singular */
+}
+
+add_action("init","plz_add_custom_post_type"); /*  el primer argumento "init" hace que todo eso se cargue el momento de inicializar la pagina */
