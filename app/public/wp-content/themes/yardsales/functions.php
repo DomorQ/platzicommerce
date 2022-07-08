@@ -144,3 +144,18 @@ function plz_add_custom_post_type(){
 }
 
 add_action("init","plz_add_custom_post_type"); /*  el primer argumento "init" hace que todo eso se cargue el momento de inicializar la pagina */
+
+
+function plz_add_to_signin_menu(){
+    
+    $current_user = wp_get_current_user(); /* nos devuevle los datos del usuario logeado */
+
+    /* var_dump($current_user);  var_dumb nos ayuda a debuggear */
+
+    $msg = is_user_logged_in()? $current_user->user_email : "Sign-in";
+    /* aqui preguntamos si es que un usario esta loggeado y si lo esta que use el metodo user_email para saber su email  */
+
+    echo $msg;
+}
+
+add_action("plz_signin","plz_add_to_signin_menu");
